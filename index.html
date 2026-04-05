@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sandman — Custom Toys & Art Models</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* === RESET & BASE === */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #2c2420;
+      background: #f5f0eb;
+      line-height: 1.6;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Bebas Neue', cursive;
+      letter-spacing: 0.05em;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    section { padding: 80px 20px; }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    /* === COLOR PALETTE === */
+    :root {
+      --bg-dark: #2c2420;
+      --bg-warm: #3e322b;
+      --bg-light: #f5f0eb;
+      --bg-cream: #ebe3d9;
+      --accent: #c17f4e;
+      --accent-hover: #a96a3a;
+      --text-dark: #2c2420;
+      --text-light: #f5f0eb;
+      --text-muted: #8a7b6f;
+    }
+
+    /* === NAVIGATION === */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(44, 36, 32, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 0 20px;
+    }
+    nav .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 60px;
+    }
+    nav .logo {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.5rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+    }
+    nav .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+    nav .nav-links a {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: color 0.3s;
+    }
+    nav .nav-links a:hover { color: var(--accent); }
+
+    /* === HAMBURGER (mobile) === */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 5px;
+    }
+    .hamburger span {
+      display: block;
+      width: 25px;
+      height: 2px;
+      background: var(--text-light);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      nav .nav-links {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: rgba(44, 36, 32, 0.98);
+        flex-direction: column;
+        padding: 20px;
+        gap: 15px;
+        text-align: center;
+      }
+      nav .nav-links.open { display: flex; }
+    }
+
+    /* === HERO === */
+    #hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: url('portfolio_materials/img/Custom Reaver/Custom Reaver.jpg') center 20%/cover no-repeat;
+      padding: 0;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(44, 36, 32, 0.7) 0%,
+        rgba(44, 36, 32, 0.5) 50%,
+        rgba(44, 36, 32, 0.8) 100%
+      );
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      color: var(--text-light);
+    }
+    .hero-content h1 {
+      font-size: clamp(3rem, 10vw, 7rem);
+      letter-spacing: 0.15em;
+      margin-bottom: 10px;
+    }
+    .hero-content p {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: var(--bg-cream);
+      margin-bottom: 30px;
+      font-weight: 400;
+    }
+    .hero-content .cta {
+      display: inline-block;
+      padding: 14px 40px;
+      background: var(--accent);
+      color: var(--text-light);
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.2rem;
+      letter-spacing: 0.1em;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .hero-content .cta:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      animation: bounce 2s infinite;
+    }
+    .scroll-indicator svg { width: 30px; height: 30px; stroke: var(--bg-cream); opacity: 0.7; }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(10px); }
+    }
+
+    /* === PORTFOLIO === */
+    #portfolio { background: var(--bg-cream); }
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      text-align: center;
+      margin-bottom: 10px;
+      color: var(--text-dark);
+    }
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 50px;
+      font-size: 1rem;
+    }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+    .portfolio-card {
+      background: var(--bg-light);
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+    .portfolio-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    .portfolio-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+    .portfolio-card .card-body {
+      padding: 20px;
+    }
+    .portfolio-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 5px;
+      color: var(--text-dark);
+    }
+    .portfolio-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .portfolio-card .media-badge {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 3px 10px;
+      background: var(--accent);
+      color: var(--text-light);
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 3px;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 1024px) {
+      .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .portfolio-grid { grid-template-columns: 1fr; }
+    }
+
+    /* === MODAL / LIGHTBOX === */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(0, 0, 0, 0.9);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal {
+      background: var(--bg-light);
+      border-radius: 10px;
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 2rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      background: none;
+      border: none;
+      z-index: 10;
+      line-height: 1;
+      transition: color 0.3s;
+    }
+    .modal-close:hover { color: var(--text-dark); }
+    .modal-carousel {
+      position: relative;
+      background: #1a1410;
+      border-radius: 10px 10px 0 0;
+      overflow: hidden;
+    }
+    .modal-carousel img,
+    .modal-carousel video {
+      width: 100%;
+      max-height: 500px;
+      object-fit: contain;
+      display: none;
+    }
+    .modal-carousel img.active,
+    .modal-carousel video.active { display: block; }
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.15);
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      padding: 15px 12px;
+      cursor: pointer;
+      transition: background 0.3s;
+      z-index: 5;
+    }
+    .carousel-btn:hover { background: rgba(255,255,255,0.3); }
+    .carousel-btn.prev { left: 0; border-radius: 0 5px 5px 0; }
+    .carousel-btn.next { right: 0; border-radius: 5px 0 0 5px; }
+    .carousel-dots {
+      text-align: center;
+      padding: 12px;
+      background: #1a1410;
+    }
+    .carousel-dots span {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      margin: 0 4px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .carousel-dots span.active { background: var(--accent); }
+    .modal-body {
+      padding: 25px;
+    }
+    .modal-body h3 {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+    .modal-body p {
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    @media (max-width: 768px) {
+      .modal { max-height: 95vh; margin: 10px; }
+      .modal-carousel img, .modal-carousel video { max-height: 300px; }
+    }
+
+    /* === ABOUT === */
+    #about { background: var(--bg-light); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 50px;
+      align-items: center;
+    }
+    .about-image {
+      background: var(--bg-cream);
+      border-radius: 8px;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      border: 2px dashed var(--text-muted);
+    }
+    .about-text h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 20px;
+      color: var(--text-dark);
+    }
+    .about-text p {
+      margin-bottom: 15px;
+      color: #5a4d42;
+      line-height: 1.8;
+    }
+    .about-text .highlight {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      .about-image { height: 300px; }
+    }
+
+    /* === CONTACT === */
+    #contact { background: var(--bg-cream); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 50px;
+    }
+    .contact-form { display: flex; flex-direction: column; gap: 15px; }
+    .contact-form input,
+    .contact-form textarea {
+      padding: 14px 18px;
+      border: 1px solid #d4cbc2;
+      border-radius: 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      transition: border-color 0.3s;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .contact-form textarea { resize: vertical; min-height: 140px; }
+    .contact-form button {
+      padding: 14px 40px;
+      background: var(--accent);
+      color: var(--text-light);
+      border: none;
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.2rem;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background 0.3s, transform 0.3s;
+      align-self: flex-start;
+    }
+    .contact-form button:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+    .contact-info h3 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: var(--text-dark);
+    }
+    .contact-info p {
+      color: #5a4d42;
+      margin-bottom: 15px;
+      line-height: 1.8;
+    }
+    .contact-links { list-style: none; margin-top: 20px; }
+    .contact-links li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 15px;
+      color: #5a4d42;
+    }
+    .contact-links li svg {
+      width: 22px;
+      height: 22px;
+      fill: var(--accent);
+      flex-shrink: 0;
+    }
+    .contact-links a {
+      color: var(--accent);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    .contact-links a:hover { color: var(--accent-hover); }
+
+    @media (max-width: 768px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    /* === FOOTER === */
+    footer {
+      background: var(--bg-dark);
+      color: var(--text-light);
+      text-align: center;
+      padding: 30px 20px;
+    }
+    footer p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px; }
+    .footer-socials { display: flex; justify-content: center; gap: 20px; }
+    .footer-socials a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      transition: background 0.3s;
+    }
+    .footer-socials a:hover { background: var(--accent); }
+    .footer-socials svg { width: 18px; height: 18px; fill: var(--text-light); }
+
+    /* === SCROLL ANIMATIONS === */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#hero" class="logo">Sandman</a>
+      <button class="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="hero">
+    <div class="hero-content">
+      <h1>SANDMAN</h1>
+      <p>Custom Toys & Art Models — Built to Your Vision</p>
+      <a href="#portfolio" class="cta">View My Work</a>
+    </div>
+    <a href="#portfolio" class="scroll-indicator">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
+        <path d="M7 10l5 5 5-5"/>
+      </svg>
+    </a>
+  </section>
+
+  <!-- Portfolio -->
+  <section id="portfolio">
+    <div class="container">
+      <h2 class="section-title">MY WORK</h2>
+      <p class="section-subtitle">Custom builds made to order — each piece is unique</p>
+      <div class="portfolio-grid">
+
+        <div class="portfolio-card" onclick="openModal('mego')">
+          <img src="portfolio_materials/img/Custom Mego RX-78(2).jpg" alt="Custom Mego RX-78">
+          <div class="card-body">
+            <h3>Custom Mego RX-78</h3>
+            <p>Full repaint of Mego RX-78 Gundam figures — from primer gray to detailed color application.</p>
+            <span class="media-badge">Photos + Video</span>
+          </div>
+        </div>
+
+        <div class="portfolio-card" onclick="openModal('reaver')">
+          <img src="portfolio_materials/img/Custom Reaver/Custom Reaver(3).jpg" alt="Custom Reaver">
+          <div class="card-body">
+            <h3>Custom Reaver</h3>
+            <p>Detailed custom paint job with red jacket, mechanical limbs, and dual-blade weapons.</p>
+            <span class="media-badge">Photos</span>
+          </div>
+        </div>
+
+        <div class="portfolio-card" onclick="openModal('kaizer')">
+          <video src="portfolio_materials/vids/Custom KAIZER.mp4" muted playsinline preload="metadata" style="width:100%;height:250px;object-fit:cover;" poster=""></video>
+          <div class="card-body">
+            <h3>Custom KAIZER</h3>
+            <p>Custom build showcase — watch the full turntable video for all the details.</p>
+            <span class="media-badge">Video</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image">
+          <span>[ Artist Photo Here ]</span>
+        </div>
+        <div class="about-text">
+          <h2>ABOUT SANDMAN</h2>
+          <p>I'm a custom toy artist specializing in <span class="highlight">hand-painted repaints, kitbashing, and full custom builds</span> of art models and action figures.</p>
+          <p>Every piece I create starts with a conversation — your vision, your favorite character, your dream design. From there, I bring it to life using professional-grade airbrush equipment, high-quality paints, and years of experience working with different scales and materials.</p>
+          <p>Whether it's a detailed Gundam repaint, a one-of-a-kind character custom, or a full scratch build — I treat every project like a work of art, because that's exactly what it is.</p>
+          <p><span class="highlight">Every piece is unique. Every piece is built for you.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+  <div class="container">
+    <h2 class="section-title">GET IN TOUCH</h2>
+    <p class="section-subtitle">Have a project in mind? Let's make it happen.</p>
+    <div class="contact-grid">
+      <form class="contact-form" action="mailto:your@email.com" method="POST" enctype="text/plain">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Tell me about your project — what figure, what style, what's your vision?" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+      <div class="contact-info">
+        <h3>LET'S CONNECT</h3>
+        <p>Got questions about a custom project? Want to see more of my work? Reach out through any of these channels:</p>
+        <ul class="contact-links">
+          <li>
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            <a href="mailto:your@email.com">your@email.com</a>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.36 2 1.69 6.03 1.69 11.05c0 2.84 1.42 5.37 3.63 7.02v3.43l3.27-1.8c.87.24 1.8.37 2.76.37 5.64 0 10.22-4.03 10.22-9.02S17.64 2 12 2zm1.07 12.15l-2.6-2.77-5.08 2.77 5.58-5.92 2.67 2.77 5.01-2.77-5.58 5.92z"/></svg>
+            <a href="https://m.me/yourpage" target="_blank">Messenger</a>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
+            <a href="https://facebook.com/yourpage" target="_blank">Facebook</a>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
+            <a href="https://instagram.com/yourpage" target="_blank">Instagram</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Footer -->
+  <footer>
+  <p>&copy; 2026 Sandman. All rights reserved.</p>
+  <div class="footer-socials">
+    <a href="https://facebook.com/yourpage" target="_blank" aria-label="Facebook">
+      <svg viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
+    </a>
+    <a href="https://instagram.com/yourpage" target="_blank" aria-label="Instagram">
+      <svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
+    </a>
+    <a href="mailto:your@email.com" aria-label="Email">
+      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+    </a>
+  </div>
+</footer>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <div class="modal-carousel" id="modalCarousel">
+        <button class="carousel-btn prev" onclick="carouselNav(-1)">&#10094;</button>
+        <button class="carousel-btn next" onclick="carouselNav(1)">&#10095;</button>
+      </div>
+      <div class="carousel-dots" id="carouselDots"></div>
+      <div class="modal-body">
+        <h3 id="modalTitle"></h3>
+        <p id="modalDesc"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Hamburger toggle
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('open');
+    });
+    // Close menu on link click
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('open');
+      });
+    });
+
+    // Portfolio data
+    const portfolioData = {
+      mego: {
+        title: 'Custom Mego RX-78',
+        desc: 'Full repaint of Mego RX-78 Gundam figures — transformed from bare primer gray to fully detailed color scheme with panel lining and decals. Each figure is hand-painted with an airbrush for smooth, even coverage.',
+        media: [
+          { type: 'image', src: 'portfolio_materials/img/Custom Mego RX-78.jpg' },
+          { type: 'image', src: 'portfolio_materials/img/Custom Mego RX-78(2).jpg' },
+          { type: 'video', src: 'portfolio_materials/vids/Custom Mego RX-78.mp4' },
+          { type: 'video', src: 'portfolio_materials/vids/Custom Mego RX-78(2).mp4' },
+        ]
+      },
+      reaver: {
+        title: 'Custom Reaver',
+        desc: 'Detailed custom paint job featuring a striking red jacket, mechanical prosthetic limbs, and dual-blade weapon system. Multiple coats of gloss and matte finishes bring out the contrast between organic and mechanical elements.',
+        media: [
+          { type: 'image', src: 'portfolio_materials/img/Custom Reaver/Custom Reaver.jpg' },
+          { type: 'image', src: 'portfolio_materials/img/Custom Reaver/Custom Reaver(1).jpg' },
+          { type: 'image', src: 'portfolio_materials/img/Custom Reaver/Custom Reaver(2).jpg' },
+          { type: 'image', src: 'portfolio_materials/img/Custom Reaver/Custom Reaver(3).jpg' },
+          { type: 'image', src: 'portfolio_materials/img/Custom Reaver/Custom Reaver(4).jpg' },
+          { type: 'image', src: 'portfolio_materials/img/Custom Reaver/Custom Reaver(5).jpg' },
+        ]
+      },
+      kaizer: {
+        title: 'Custom KAIZER',
+        desc: 'Full custom build showcased in a turntable video — watch it spin to see all the detail work from every angle.',
+        media: [
+          { type: 'video', src: 'portfolio_materials/vids/Custom KAIZER.mp4' },
+        ]
+      }
+    };
+
+    let currentSlide = 0;
+    let currentMedia = [];
+
+    function openModal(projectId) {
+      const project = portfolioData[projectId];
+      if (!project) return;
+
+      document.getElementById('modalTitle').textContent = project.title;
+      document.getElementById('modalDesc').textContent = project.desc;
+
+      const carousel = document.getElementById('modalCarousel');
+      // Remove old media (keep buttons)
+      carousel.querySelectorAll('img, video').forEach(el => el.remove());
+
+      currentMedia = project.media;
+      currentSlide = 0;
+
+      // Build carousel items
+      currentMedia.forEach((item, i) => {
+        let el;
+        if (item.type === 'image') {
+          el = document.createElement('img');
+          el.src = item.src;
+          el.alt = project.title;
+        } else {
+          el = document.createElement('video');
+          el.src = item.src;
+          el.controls = true;
+          el.playsInline = true;
+          el.preload = 'metadata';
+        }
+        if (i === 0) el.classList.add('active');
+        carousel.insertBefore(el, carousel.querySelector('.carousel-btn.prev'));
+      });
+
+      // Build dots
+      const dotsContainer = document.getElementById('carouselDots');
+      dotsContainer.innerHTML = '';
+      currentMedia.forEach((_, i) => {
+        const dot = document.createElement('span');
+        if (i === 0) dot.classList.add('active');
+        dot.onclick = () => goToSlide(i);
+        dotsContainer.appendChild(dot);
+      });
+
+      // Show/hide nav buttons
+      const showNav = currentMedia.length > 1;
+      carousel.querySelectorAll('.carousel-btn').forEach(btn => btn.style.display = showNav ? 'block' : 'none');
+
+      document.getElementById('modal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('modal').classList.remove('active');
+      document.body.style.overflow = '';
+      // Pause any playing videos
+      document.querySelectorAll('#modalCarousel video').forEach(v => v.pause());
+    }
+
+    function goToSlide(index) {
+      const carousel = document.getElementById('modalCarousel');
+      const items = carousel.querySelectorAll('img, video');
+      const dots = document.querySelectorAll('#carouselDots span');
+
+      // Pause current video if any
+      if (items[currentSlide] && items[currentSlide].tagName === 'VIDEO') {
+        items[currentSlide].pause();
+      }
+
+      items[currentSlide].classList.remove('active');
+      dots[currentSlide].classList.remove('active');
+
+      currentSlide = index;
+      if (currentSlide >= items.length) currentSlide = 0;
+      if (currentSlide < 0) currentSlide = items.length - 1;
+
+      items[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+    }
+
+    function carouselNav(direction) {
+      goToSlide(currentSlide + direction);
+    }
+
+    // Close modal on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'ArrowLeft') carouselNav(-1);
+      if (e.key === 'ArrowRight') carouselNav(1);
+    });
+
+    // Active nav highlighting on scroll
+    const sections = document.querySelectorAll('section');
+    const navItems = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        if (window.scrollY >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+      navItems.forEach(link => {
+        link.style.color = '';
+        if (link.getAttribute('href') === '#' + current) {
+          link.style.color = 'var(--accent)';
+        }
+      });
+    });
+
+    // Fade-in on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.portfolio-card, .about-grid, .contact-grid').forEach(el => {
+      el.classList.add('fade-in');
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
