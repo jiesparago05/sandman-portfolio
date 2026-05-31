@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dave Bedia — Links | Custom Toys & Art Models</title>
+  <meta name="description" content="All of Dave Bedia's links in one place — Instagram, Facebook, Messenger commissions, and portfolio. Custom toys, repaints, and kitbash builds.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!--
+  ============================================================================
+   EDIT ME — this is the QR landing page (link-in-bio). Quick guide:
+  ============================================================================
+   1. LINKS: each button below is a plain <a href="...">. To change a link,
+      edit its href. They're clearly labelled (search "BUTTON:").
+   2. ADD EMAIL / TIKTOK: two ready-made buttons are commented out near the
+      bottom of the button list. Uncomment the one you want and drop in the URL.
+   3. PROFILE IMAGE: search "PROFILE IMAGE". It currently shows a real toy
+      photo. To use a logo instead, drop a square image at
+      links/images/dave-bedia-logo.png and point the avatar src at it.
+   4. This page lives at /links/  →  the QR should point to:
+      https://jiesparago05.github.io/sandman-portfolio/links/
+  ============================================================================
+  -->
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg:      #14110d;
+      --surface: #1c1813;
+      --raised:  #241e18;
+      --text:    #f0e9dd;
+      --muted:   #a99e8d;
+      --accent:  #d9a441;
+      --glow:    #f0c674;
+      --bronze:  #b08355;
+      --border:  rgba(176,131,85,0.22);
+      --border-strong: rgba(176,131,85,0.45);
+    }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background:
+        radial-gradient(900px 500px at 50% -8%, #241d14 0%, var(--bg) 58%),
+        var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px 28px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    /* grain texture */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      z-index: 0; pointer-events: none;
+      opacity: 0.05; mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .wrap {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 460px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin: auto 0;
+    }
+
+    /* ---- Header ---- */
+    .avatar {
+      width: 124px; height: 124px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 0 6px rgba(217,164,65,0.10), 0 12px 30px rgba(0,0,0,0.55);
+      background: var(--surface);
+      margin-bottom: 22px;
+    }
+    .brand {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      letter-spacing: 0.07em;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .role {
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.26em;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .tagline {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 340px;
+      margin: 0 auto 30px;
+    }
+
+    /* ---- Buttons ---- */
+    .links { width: 100%; display: flex; flex-direction: column; gap: 13px; }
+    .link-btn {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+      min-height: 60px;
+      padding: 16px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      color: var(--text);
+      text-decoration: none;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: 1.02rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .link-btn .ic {
+      flex-shrink: 0;
+      width: 26px; height: 26px;
+      display: grid; place-items: center;
+    }
+    .link-btn .ic svg { width: 24px; height: 24px; fill: var(--accent); transition: fill 0.2s ease; }
+    .link-btn .txt { flex: 1; text-align: left; }
+    .link-btn .chev { color: var(--bronze); font-size: 1.1rem; transition: transform 0.2s ease, color 0.2s ease; }
+    .link-btn:hover, .link-btn:focus-visible {
+      transform: translateY(-2px);
+      background: var(--raised);
+      border-color: var(--accent);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.45), 0 0 0 1px rgba(217,164,65,0.18);
+      outline: none;
+    }
+    .link-btn:active { transform: translateY(0) scale(0.99); }
+    .link-btn:hover .chev, .link-btn:focus-visible .chev { transform: translateX(4px); color: var(--accent); }
+    /* primary emphasis on the commission button */
+    .link-btn.primary { background: var(--accent); border-color: var(--accent); color: #1a1408; }
+    .link-btn.primary .ic svg { fill: #1a1408; }
+    .link-btn.primary .chev { color: rgba(26,20,8,0.6); }
+    .link-btn.primary:hover { background: var(--glow); border-color: var(--glow); }
+    .link-btn.primary:hover .chev { color: #1a1408; }
+
+    /* ---- Footer ---- */
+    footer {
+      position: relative;
+      z-index: 1;
+      margin-top: 34px;
+      text-align: center;
+    }
+    footer .tags {
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    footer .scan {
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.12em;
+      font-size: 1.05rem;
+      color: var(--accent);
+    }
+    footer .back {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 0.76rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px dashed var(--border-strong);
+      padding-bottom: 2px;
+    }
+    footer .back:hover { color: var(--accent); }
+
+    @media (max-width: 380px) {
+      .brand { font-size: 2.6rem; }
+      .link-btn { font-size: 0.95rem; min-height: 56px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .link-btn { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <!-- PROFILE IMAGE — currently a real toy photo. To use a logo instead, drop a
+         square image at links/images/dave-bedia-logo.png and set src to "images/dave-bedia-logo.png". -->
+    <img class="avatar"
+         src="../portfolio_materials/img/Custom Mego RX-78(2).jpg"
+         alt="Dave Bedia — custom toy artist">
+
+    <h1 class="brand">DAVE BEDIA</h1>
+    <p class="role">Custom Toys &amp; Art Models</p>
+    <p class="tagline">Custom figures, repaints, and collectible art models from the Dave Bedia workshop.</p>
+
+    <nav class="links">
+
+      <!-- BUTTON: Instagram -->
+      <a class="link-btn" href="https://www.instagram.com/bediadave" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg></span>
+        <span class="txt">Follow on Instagram</span>
+        <span class="chev">&rsaquo;</span>
+      </a>
+
+      <!-- BUTTON: Facebook -->
+      <a class="link-btn" href="https://www.facebook.com/mego.davebedia" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg></span>
+        <span class="txt">Follow on Facebook</span>
+        <span class="chev">&rsaquo;</span>
+      </a>
+
+      <!-- BUTTON: Messenger / Commission (highlighted) -->
+      <a class="link-btn primary" href="https://m.me/mego.davebedia" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2C6.36 2 1.69 6.03 1.69 11.05c0 2.84 1.42 5.37 3.63 7.02v3.43l3.27-1.8c.87.24 1.8.37 2.76.37 5.64 0 10.22-4.03 10.22-9.02S17.64 2 12 2zm1.07 12.15l-2.6-2.77-5.08 2.77 5.58-5.92 2.67 2.77 5.01-2.77-5.58 5.92z"/></svg></span>
+        <span class="txt">Start a Commission</span>
+        <span class="chev">&rsaquo;</span>
+      </a>
+
+      <!-- BUTTON: Website / Portfolio  (../ points back to the main site) -->
+      <a class="link-btn" href="../" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm6.93 6h-2.95a15.7 15.7 0 0 0-1.38-3.56A8 8 0 0 1 18.93 8zM12 4c.83 1.2 1.48 2.53 1.91 4h-3.82c.43-1.47 1.08-2.8 1.91-4zM4.26 14a7.8 7.8 0 0 1 0-4h3.38a16.5 16.5 0 0 0 0 4H4.26zm.81 2h2.95c.34 1.27.81 2.47 1.38 3.56A8 8 0 0 1 5.07 16zm2.95-8H5.07a8 8 0 0 1 4.33-3.56A15.7 15.7 0 0 0 8.02 8zM12 20c-.83-1.2-1.48-2.53-1.91-4h3.82A12.5 12.5 0 0 1 12 20zm2.34-6H9.66a14.7 14.7 0 0 1 0-4h4.68a14.7 14.7 0 0 1 0 4zm.26 5.56c.57-1.09 1.04-2.29 1.38-3.56h2.95a8 8 0 0 1-4.33 3.56zM16.36 14a16.5 16.5 0 0 0 0-4h3.38a7.8 7.8 0 0 1 0 4h-3.38z"/></svg></span>
+        <span class="txt">View Portfolio</span>
+        <span class="chev">&rsaquo;</span>
+      </a>
+
+      <!-- BUTTON: Email — UNCOMMENT and add a real address to enable
+      <a class="link-btn" href="mailto:your@email.com">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></span>
+        <span class="txt">Email the Artist</span>
+        <span class="chev">&rsaquo;</span>
+      </a>
+      -->
+
+      <!-- BUTTON: TikTok — UNCOMMENT and add a real handle to enable
+      <a class="link-btn" href="https://tiktok.com/@yourusername" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M16.5 3a4.8 4.8 0 0 0 4 4v2.9a7.7 7.7 0 0 1-4-1.16v5.3a5.94 5.94 0 1 1-5.94-5.94c.2 0 .4 0 .6.04v3.06a2.9 2.9 0 1 0 2.04 2.77V3h3.3z"/></svg></span>
+        <span class="txt">Watch Toy Builds</span>
+        <span class="chev">&rsaquo;</span>
+      </a>
+      -->
+
+    </nav>
+  </main>
+
+  <footer>
+    <div class="tags">Custom Toys • Repaints • Kitbash Builds</div>
+    <div class="scan">Scan. Follow. Collect.</div>
+    <a class="back" href="../">&larr; Back to portfolio</a>
+  </footer>
+</body>
+</html>
