@@ -1,0 +1,18 @@
+# Workspace / tooling — not part of the published site
+.claude/
+.superpowers/
+docs/
+site tear-down/
+memory/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+
+# Node / scratch
+node_modules/
+package.json
+package-lock.json
+*.log
+.shot*.mjs
+shot-*.png
