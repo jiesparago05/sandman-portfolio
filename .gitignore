@@ -4,6 +4,7 @@
 docs/
 site tear-down/
 memory/
+_phone_import/
 
 # OS / editor
 .DS_Store
